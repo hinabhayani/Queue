@@ -1,0 +1,83 @@
+class MyCircularQueue {
+List<Integer> listOfEelements=new ArrayList<Integer>();
+    int head;
+    int rear;
+    int size;
+    public MyCircularQueue(int k) {
+        size=k;
+        head=0;
+        rear=-1;
+    }
+    
+    public boolean enQueue(int value) {
+        if(isFull())
+            return false;
+         if(isEmpty()){
+               rear=0;
+               listOfEelements.add(value);
+          }else if(rear != size-1){
+             listOfEelements.add(value);
+              rear++; 
+          }else{
+             listOfEelements.add(head,value);
+             rear=0;
+         }
+       
+        return true;
+        
+    }
+    
+    public boolean deQueue() {
+        if(isEmpty()){
+            return false;
+        }
+         listOfEelements.remove(head);
+        rear=rear-1;
+        return true;
+    }
+    
+    public int Front() {
+        if(isEmpty())
+            return -1;
+        return listOfEelements.get(head);
+        
+    }
+    
+    public int Rear() {
+        if(isEmpty())
+            return -1;
+        return listOfEelements.get(rear);
+    }
+    
+    public boolean isEmpty() {
+        return listOfEelements.size()==0;
+    }
+    
+    public boolean isFull() {
+        return rear==size-1;
+    }
+    
+    public void main(String[] args){
+        MyCircularQueue  queue= new MyCircularQueue(3);
+        queue.enQueue(1);
+        queue.enQueue(2);
+        queue.enQueue(3);
+        queue.enQueue(4);
+        queue.Rear();
+        queue.isFull();
+        queue.deQueue();
+        queue.enQueue(4);
+        queue.Rear();
+    }
+}
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue obj = new MyCircularQueue(k);
+ * boolean param_1 = obj.enQueue(value);
+ * boolean param_2 = obj.deQueue();
+ * int param_3 = obj.Front();
+ * int param_4 = obj.Rear();
+ * boolean param_5 = obj.isEmpty();
+ * boolean param_6 = obj.isFull();
+ */
